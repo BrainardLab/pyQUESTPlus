@@ -1,6 +1,6 @@
 import numpy as np
 
-def qpLogLikelihood(stimCounts, qpPF, psiParams, check=False):!
+def qpLogLikelihood(stimCounts, qpPF, psiParams, check=False):
     """
     Compute log likelihood of a stimulus count array 
 
@@ -97,7 +97,8 @@ def qpNLogP(n, p):
         raise ValueError("n and p must have the same shape")
 
     # Compute nLogP
-    nLogP = n * np.log(p)
+    epsilon = 1e-10
+    nLogP = n * np.log(p + epsilon)
     nLogP[(p == 0) & (n > 0)] = -1 * np.finfo(float).max
     nLogP[(p == 0) & (n == 0)] = 0
 
