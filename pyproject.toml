@@ -19,6 +19,14 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+
+# Dependencies
+dependencies = [
+        "numpy>1.20",
+        "matplotlib>=3.7",
+        "scipy>1.10"
+]
+
 # Optional dependencies for documentation [docs] and testing/linting [dev]:
 [project.optional-dependencies]
 docs = [
@@ -36,14 +44,14 @@ dev = [
     "pytest",                       # Testing framework
     "flake8",                       # Code linter
     "pytest-cov",                   # Test coverage plugin for pytest
-    "pydocstyle",                    # Docstrings linter
+    "pydocstyle",                   # Docstrings linter
 ]
 
 [project.urls]
 "Homepage" = "https://github.com/BrainardLab/pyQUESTPlu"
 
 [tool.setuptools_scm]
-write_to = "src/ccn_template/version.py"
+write_to = "src/pyQUESTPlus/version.py"
 version_scheme = 'python-simplified-semver'
 local_scheme = 'no-local-version'
 
@@ -52,7 +60,7 @@ exclude = '/version\.py$'
 
 [tool.pytest.ini_options]
 # addopts: Additional command-line options for pytest.
-addopts = "--cov=ccn_template"
+addopts = "--cov=PyQUESTPlus"
 testpaths = ["tests"]
 
 [tool.coverage.report]
