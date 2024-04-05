@@ -1,4 +1,4 @@
-"""CCN template."""
+"""PyQUESTPlus."""
 
-from . import hello_world
+from . import utilties
 from .version import __version__

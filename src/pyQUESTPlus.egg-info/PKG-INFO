@@ -1,0 +1,33 @@
+Metadata-Version: 2.1
+Name: pyQUESTPlus
+Version: 0.0.1.dev5
+Summary: Python implementation of QUEST Plus
+Author-email: David Brainard <brainard@psych.upenn.edu>
+Project-URL: Homepage, https://github.com/BrainardLab/pyQUESTPlu
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>1.20
+Requires-Dist: matplotlib>=3.7
+Requires-Dist: scipy>1.10
+Provides-Extra: docs
+Requires-Dist: mkdocs; extra == "docs"
+Requires-Dist: mkdocstrings[python]; extra == "docs"
+Requires-Dist: mkdocs_section_index; extra == "docs"
+Requires-Dist: mkdocs_gen_files; extra == "docs"
+Requires-Dist: mkdocs_literate_nav; extra == "docs"
+Requires-Dist: mkdocs-gallery; extra == "docs"
+Requires-Dist: pillow; extra == "docs"
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: pydocstyle; extra == "dev"
+
+# pyQUESTPlus
+Python translation of BrainardLab's mQUESTPlus Matlab implementation of the QuestPlus adaptive procedure.

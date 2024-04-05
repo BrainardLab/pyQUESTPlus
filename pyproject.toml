@@ -27,6 +27,11 @@ dependencies = [
         "scipy>1.10"
 ]
 
+% Configure
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pyQUESTPlus"]
+
 # Optional dependencies for documentation [docs] and testing/linting [dev]:
 [project.optional-dependencies]
 docs = [
