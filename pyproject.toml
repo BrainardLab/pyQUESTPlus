@@ -27,7 +27,7 @@ dependencies = [
         "scipy>1.10"
 ]
 
-% Configure
+# Configure
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["pyQUESTPlus"]

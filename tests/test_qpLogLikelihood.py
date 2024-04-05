@@ -1,8 +1,8 @@
-import unittest
+import pytest
 import numpy as np
-from qpLogLikelihood import qpLogLikelihood
+from pyQUESTPlus.utilities import qpLogLikelihood
 
-class TestQpLogLikelihood(unittest.TestCase):
+class TestQpLogLikelihood:
     def test_invalid_stimCounts(self):
         with self.assertRaises(TypeError):
             qpLogLikelihood('invalid', lambda x: x, [1, 2, 3])
@@ -31,5 +31,3 @@ def qpPFTest(stim,x):
     
     return np.array([0.1 for _ in stim])
     
-if __name__ == '__main__':
-    unittest.main()
