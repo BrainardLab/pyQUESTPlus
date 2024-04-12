@@ -30,6 +30,48 @@ def ArrayEntropy(probArray):
 
     return arrayEntropy
 
+def DrawFromDomainList(domainList):
+    """
+    Draw parameters from list of domain for each parameter
+
+    Parameters:
+    domainList : list
+        List where each entry is the domain for the corresponding parameter
+
+    Returns:
+    v : list
+        The random draw in row vector form
+    """
+    if not domainList:
+        raise ValueError("domainList must not be empty")
+    if not isinstance(domainList, list):
+        raise TypeError("domainList must be a list")
+    vlb, vub = GetBoundsFromDomainList(domainList)
+    v = [np.random.uniform(vlb[i], vub[i]) for i in range(len(domainList))]
+    return v
+
+def GetBoundsFromDomainList(domainList):
+    """
+    Get parameter bounds from list of domain for each parameter
+
+    Parameters:
+    domainList : list
+        List where each entry is the domain for the corresponding parameter
+
+    Returns:
+    vlb : list
+        Lower bound in row vector form
+    vub : list
+        Upper bound in row vector form
+    """
+    if not domainList:
+        raise ValueError("domainList must not be empty")
+    if not isinstance(domainList, list):
+        raise TypeError("domainList must be a list")
+    
+    vlb = [min(domain) for domain in domainList]
+    vub = [max(domain) for domain in domainList]
+    return vlb, vub
 
 def LogLikelihood(stimCounts, qpPF, psiParams, check=False):
     """
