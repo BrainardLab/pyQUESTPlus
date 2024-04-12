@@ -1,4 +1,4 @@
 """PyQUESTPlus."""
 
-from . import qpLogLikelihood
+from . import utilities
 from .version import __version__

@@ -1,0 +1,12 @@
+conda create --name Foo python-3.11
+conda active Foo
+conda deactivate 
+conde env remove Foo
+
+Should be possible to automatically activate environment with VSCode.
+
+cmd-shift-P, python: select interpreter; enter in path to python in the environment that should be associated with the project.  Find this with $PATH while in the environment.  Need to exit and restart VSCode for it to take.
+
+pip install -e ".[docs,dev]"
+
+pytest

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pyQUESTPlus
-Version: 0.0.1.dev8
+Version: 0.0.1.dev10
 Summary: Python implementation of QUEST Plus
 Author-email: David Brainard <brainard@psych.upenn.edu>
 Project-URL: Homepage, https://github.com/BrainardLab/pyQUESTPlu
