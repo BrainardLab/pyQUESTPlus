@@ -1,52 +1,79 @@
 import pytest
 import numpy as np
-from pyQUESTPlus.utilities import qpLogLikelihood, qpNLogP
+from pyQUESTPlus.utilities import ArrayEntropy, LogLikelihood, NLogP, StimIndexToStim
 
-class TestQpLogLikelihood:
+class TestArrayEntropy:
+    def test_ArrayEntropy_valid_input(self):
+        probArray = np.array([0.1, 0.2, 0.7]).T
+        result = ArrayEntropy(probArray)
+        expected_result = 1.1567796494470395  # This is the expected entropy for the given probArray
+        assert np.isclose(result, expected_result), f"Expected {expected_result}, but got {result}"
+
+    def test_ArrayEntropy_invalid_input(self):
+        probArray = np.array([0.1, 0.2, 0.8]).T  # This array does not sum to 1
+        with pytest.raises(AssertionError):
+            ArrayEntropy(probArray)
+class TestLogLikelihood:
     def test_invalid_stimCounts(self):
         with pytest.raises(TypeError):
-            qpLogLikelihood('invalid', lambda x: x, [1, 2, 3])
+            LogLikelihood('invalid', lambda x: x, [1, 2, 3])
 
-    def test_invalid_qpPF(self):
+    def test_invalid_PF(self):
         with pytest.raises(TypeError):
-            qpLogLikelihood([{'stim': [1, 2, 3], 'outcomeCounts': [4, 5, 6]}], 'invalid', [1, 2, 3])
+            LogLikelihood([{'stim': [1, 2, 3], 'outcomeCounts': [4, 5, 6]}], 'invalid', [1, 2, 3])
 
     def test_invalid_psiParams(self):
         with pytest.raises(TypeError):
-            qpLogLikelihood([{'stim': [1, 2, 3], 'outcomeCounts': [4, 5, 6]}], lambda x: x, 'invalid')
+            LogLikelihood([{'stim': [1, 2, 3], 'outcomeCounts': [4, 5, 6]}], lambda x: x, 'invalid')
 
     def test_invalid_check(self):
         with pytest.raises(TypeError):
-            qpLogLikelihood([{'stim': [1, 2, 3], 'outcomeCounts': [4, 5, 6]}], lambda x: x, [1, 2, 3], 'invalid')
+            LogLikelihood([{'stim': [1, 2, 3], 'outcomeCounts': [4, 5, 6]}], lambda x: x, [1, 2, 3], 'invalid')
 
     def test_valid_input(self):
         stimCounts = [{'stim': [1, 2, 3], 'outcomeCounts': [0, 2, 2]}]
-        # qpPF = lambda x: x(0)  # Fix: Correctly define the input parameter and return the desired value
         psiParams = [1]
-        result = qpLogLikelihood(stimCounts, qpPFTest, psiParams)
+        result = LogLikelihood(stimCounts, PFTest, psiParams)
         assert isinstance(result, float)  # Assuming the function returns a float
         
-class TestQpNLogP:
+class TestNLogP:
     def test_basic(self):
         n = np.array([1, 2, 3])
         p = np.array([0.1, 0.2, 0.3])
         expected = np.array([-2.3026,   -3.2189,  -3.6119])
-        np.testing.assert_almost_equal(qpNLogP(n, p), expected, decimal=4)
+        np.testing.assert_almost_equal(NLogP(n, p), expected, decimal=4)
 
     def test_zero_n(self):
         n = np.array([0, 0, 0])
         p = np.array([0.1, 0.2, 0.3])
         expected = np.array([0, 0, 0])
-        np.testing.assert_almost_equal(qpNLogP(n, p), expected, decimal=5)
+        np.testing.assert_almost_equal(NLogP(n, p), expected, decimal=5)
 
     def test_zero_p(self):
         n = np.array([1, 2, 3])
         p = np.array([0, 0, 0])
+        
+def test_StimIndexToStim():
+    # Test with a 2D array
+    stimDomain = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    stimIndex = 1
+    expected_result = np.array([4, 5, 6])
+    assert np.array_equal(StimIndexToStim(stimIndex, stimDomain), expected_result)
 
-# This has the right input/output format for a QP function. Enough for an arg test.
-def qpPFTest(stim,x):
+    # Test with a 1D array
+    stimDomain = np.array([[1], [2], [3]])
+    stimIndex = 1
+    expected_result = np.array([2])
+    assert np.array_equal(StimIndexToStim(stimIndex, stimDomain), expected_result)
+
+    # Test with an out-of-bounds index
+    stimDomain = np.array([1, 2, 3])
+    stimIndex = 4
+    with pytest.raises(IndexError):
+        StimIndexToStim(stimIndex, stimDomain)
+
+# This has the right input/output format for a PF function. Enough for an arg test.
+def PFTest(stim,x):
     result = np.full(stim.shape,0.1) #np.array([0.1 for _ in stim])
-    #print(result.shape)
-    #breakpoint()
     return result
     

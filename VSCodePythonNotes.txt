@@ -10,3 +10,11 @@ cmd-shift-P, python: select interpreter; enter in path to python in the environm
 pip install -e ".[docs,dev]"
 
 pytest
+
+
+Questions:
+    Tests print out: "WARNING: Failed to generate report: No data to report."
+    Linting
+    Auto formatting
+    Is my use of static class reasonable?
+    Documentation style and generating autodocs
